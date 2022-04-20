@@ -1,0 +1,5 @@
+module llvm [extern_c] {
+    header "C/LLVMC.h"
+    header "C/shim.h"
+    export *
+}

@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "GRDB",
+        "repositoryURL": "https://github.com/groue/GRDB.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "4472d3a60ec4cc383503eba5072ce17f781b9ddc",
+          "version": "5.23.0"
+        }
+      },
+      {
+        "package": "Highlightr",
+        "repositoryURL": "https://github.com/raspu/Highlightr.git",
+        "state": {
+          "branch": null,
+          "revision": "93199b9e434f04bda956a613af8f571933f9f037",
+          "version": "2.1.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

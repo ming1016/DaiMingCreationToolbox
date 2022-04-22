@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 final class DaiMingCreationToolboxApplication: NSApplication {
     let strongDelegate = AppDelegate()
     
@@ -29,8 +28,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        print("did")
+        
+        DispatchQueue.main.async {
+            if NSApp.windows.isEmpty {
+                if let projects = UserDefaults.standard.array(forKey: AppDelegate.recoverWorkspacesKey) as? [String],
+                   !projects.isEmpty {
+                    projects.forEach { path in
+                        //
+                    }
+                    return
+                }
+            }
+        }
+        
     }
 }
 
-
+extension AppDelegate {
+    static let recoverWorkspacesKey = "recover.workspaces"
+}

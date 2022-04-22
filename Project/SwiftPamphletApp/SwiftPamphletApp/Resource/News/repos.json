@@ -479,6 +479,10 @@
             {
                 "id":"analogcode/Swift-Radio-Pro",
                 "des":"电台应用"
+            },
+            {
+                "id":"bizz84/SwiftyStoreKit",
+                "des":"应用内购框架"
             }
         ]
     },

@@ -10,6 +10,7 @@
 		08F682D728112A2E00A54276 /* DaiMingCreationToolboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F682D628112A2E00A54276 /* DaiMingCreationToolboxApp.swift */; };
 		08F682DB28112A2F00A54276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08F682DA28112A2F00A54276 /* Assets.xcassets */; };
 		08F682DE28112A2F00A54276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08F682DD28112A2F00A54276 /* Preview Assets.xcassets */; };
+		08F682ED2811734A00A54276 /* WorkspaceClient in Frameworks */ = {isa = PBXBuildFile; productRef = 08F682EC2811734A00A54276 /* WorkspaceClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,7 +19,6 @@
 		08F682DA28112A2F00A54276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08F682DD28112A2F00A54276 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		08F682DF28112A2F00A54276 /* DaiMingCreationToolbox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DaiMingCreationToolbox.entitlements; sourceTree = "<group>"; };
-		08F682E62811308300A54276 /* DaiMingCreationToolboxModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DaiMingCreationToolboxModules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F682ED2811734A00A54276 /* WorkspaceClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,9 +36,9 @@
 		08F682CA28112A2E00A54276 = {
 			isa = PBXGroup;
 			children = (
-				08F682E52811308300A54276 /* Packages */,
 				08F682D528112A2E00A54276 /* DaiMingCreationToolbox */,
 				08F682D428112A2E00A54276 /* Products */,
+				08F682EB2811734A00A54276 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +53,7 @@
 		08F682D528112A2E00A54276 /* DaiMingCreationToolbox */ = {
 			isa = PBXGroup;
 			children = (
+				08F682EE2811783900A54276 /* Documents */,
 				08F682D628112A2E00A54276 /* DaiMingCreationToolboxApp.swift */,
 				08F682DA28112A2F00A54276 /* Assets.xcassets */,
 				08F682DF28112A2F00A54276 /* DaiMingCreationToolbox.entitlements */,
@@ -68,12 +70,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		08F682E52811308300A54276 /* Packages */ = {
+		08F682EB2811734A00A54276 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				08F682E62811308300A54276 /* DaiMingCreationToolboxModules */,
 			);
-			name = Packages;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08F682EE2811783900A54276 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Documents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +100,9 @@
 			dependencies = (
 			);
 			name = DaiMingCreationToolbox;
+			packageProductDependencies = (
+				08F682EC2811734A00A54276 /* WorkspaceClient */,
+			);
 			productName = DaiMingCreationToolbox;
 			productReference = 08F682D328112A2E00A54276 /* DaiMingCreationToolbox.app */;
 			productType = "com.apple.product-type.application";
@@ -346,6 +357,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		08F682EC2811734A00A54276 /* WorkspaceClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WorkspaceClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 08F682CB28112A2E00A54276 /* Project object */;
 }

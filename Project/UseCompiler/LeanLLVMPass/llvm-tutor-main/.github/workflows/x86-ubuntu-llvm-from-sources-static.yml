@@ -1,0 +1,50 @@
+name: x86-Ubuntu-llvm-from-sources-static
+
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download Ninja
+        run: |
+          git clone https://github.com/ninja-build/ninja.git
+          pushd ninja
+          ./configure.py --bootstrap
+          popd
+      - name: Add Ninja to $PATH
+        run: |
+          echo "${GITHUB_WORKSPACE}/ninja" >> $GITHUB_PATH
+      - name: Clone llvm-project
+        run: |
+          git clone --depth 1 --single-branch --branch release/13.x https://github.com/llvm/llvm-project
+          cd llvm-project
+      - name: Register MBAAdd statically
+        run: |
+          bash utils/static_registration.sh --llvm_project_dir "$GITHUB_WORKSPACE/llvm-project"
+      - name: Build LLVM
+        run: |
+          cd llvm-project
+          mkdir build && cd build
+          ln -s /usr/bin/x86_64-linux-gnu-ld.gold ld
+          cmake -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" \
+            -DLLVM_TARGETS_TO_BUILD="host" -DLLVM_OPTIMIZED_TABLEGEN=ON \
+            -DLLVM_BUILD_EXAMPLES=On -DLLVM_MBASUB_LINK_INTO_TOOLS=On \
+            ../llvm
+          # Note that only the required tools are built
+          ninja
+      - name: Install lit
+        run: |
+          sudo apt-get install python3-setuptools
+          sudo pip3 install lit
+      - name: Run MBASub - sanity check
+        run: |
+          $GITHUB_WORKSPACE/llvm-project/build/bin/opt -passes=mba-sub -S $GITHUB_WORKSPACE/test/MBA_sub.ll
+      - name: Run MBASub tests
+        run: |
+          $GITHUB_WORKSPACE/llvm-project/build/bin/llvm-lit $GITHUB_WORKSPACE/llvm-project/llvm/test/Examples/MBASub/

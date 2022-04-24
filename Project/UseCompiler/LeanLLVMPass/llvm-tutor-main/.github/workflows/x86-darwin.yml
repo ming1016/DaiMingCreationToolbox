@@ -1,0 +1,33 @@
+name: x86-Darwin
+
+on: 
+  push:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: |
+          brew update
+          brew install llvm@13
+          pip3 install lit
+      - name: Build HelloWorld
+        run: |
+          cd HelloWorld
+          mkdir build && cd build
+          cmake -DLT_LLVM_INSTALL_DIR="/usr/local/opt/llvm@13/"  ../
+          make -j2
+      - name: Build llvm-tutor + run tests
+        run: |
+          cd $GITHUB_WORKSPACE
+          mkdir build && cd build
+          cmake -DLT_LLVM_INSTALL_DIR="/usr/local/opt/llvm@13/"  ../
+          make -j2
+          lit test/

@@ -35,8 +35,8 @@ namespace {
 
 // This method implements what the pass does
 void visitor(Function &F) {
-    errs() << "函数名: "<< F.getName() << "\n";
-    errs() << "参数个数: " << F.arg_size() << "\n";
+    errs() << "(llvm-tutor) Hello from: "<< F.getName() << "\n";
+    errs() << "(llvm-tutor)   number of arguments: " << F.arg_size() << "\n";
 }
 
 // New PM implementation

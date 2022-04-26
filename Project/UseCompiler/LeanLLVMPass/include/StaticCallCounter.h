@@ -13,7 +13,7 @@ using ResultStaticCC = llvm::MapVector<const llvm::Function *, unsigned>;
 struct StaticCallCounter : public llvm::AnalysisInfoMixin<StaticCallCounter> {
     using Result = ResultStaticCC;
     Result run(llvm::Module &M, llvm::ModuleAnalysisManager &);
-    StaticCallCounter::Result generateStaticCCMap(llvm::Module &M);
+    Result runOnModule(llvm::Module &M);
     // 官方接口   
     // https://llvm.org/docs/WritingAnLLVMNewPMPass.html#required-passes
     static bool isRequired() { return true; }
@@ -35,8 +35,5 @@ public:
 private:
     llvm::raw_ostream &OS;
 };
-
-
-
 
 #endif // STATICCALLCOUNTER_H

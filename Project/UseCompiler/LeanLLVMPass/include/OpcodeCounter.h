@@ -1,9 +1,3 @@
-/*
-new pass 管理器接口
-legacy pass 管理器接口
-printer pass 给新的 pass 管理器
-*/
-
 #ifndef OPCODECOUNTER_H
 #define OPCODECOUNTER_H
 

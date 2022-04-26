@@ -79,3 +79,4 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib")
 # 添加子模块
 add_subdirectory(lib)
 add_subdirectory(HelloWorld)
+add_subdirectory(tools)

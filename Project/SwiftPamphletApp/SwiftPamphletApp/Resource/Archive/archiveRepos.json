@@ -78,6 +78,10 @@
             {
                 "id":"LiarPrincess/Swift-plays-Pokemon",
                 "des":"用 Swift 编写的 Game Boy 模拟器"
+            },
+            {
+                "id":"CytopiaTeam/Cytopia",
+                "des":"像素艺术风格的开源城市模拟器45度角"
             }
         ]
     },

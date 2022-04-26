@@ -1,6 +1,7 @@
 set(PLUGINS
     OpcodeCounter
     InjectFuncCall
+    StaticCallCounter
 )
 
 set(OpcodeCounter_SOURCES
@@ -8,6 +9,9 @@ set(OpcodeCounter_SOURCES
 )
 set(InjectFuncCall_SOURCES
     InjectFuncCall.cpp
+)
+set(StaticCallCounter_SOURCES
+    StaticCallCounter.cpp
 )
 
 # 设置编译器的配置

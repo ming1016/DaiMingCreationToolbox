@@ -74,6 +74,10 @@
             {
                 "id":"CleverRaven/Cataclysm-DDA",
                 "des":"以世界末日为背景的生存游戏"
+            },
+            {
+                "id":"LiarPrincess/Swift-plays-Pokemon",
+                "des":"用 Swift 编写的 Game Boy 模拟器"
             }
         ]
     },
@@ -150,6 +154,10 @@
             {
                 "id":"RangerNJU/Static-Program-Analysis-Book",
                 "des":"静态程序分析入门教程"
+            },
+            {
+                "id":"LiarPrincess/Violet",
+                "des":"用 Swift 编写的 Python 虚拟机"
             }
         ]
     },

@@ -1,9 +1,13 @@
 set(PLUGINS
     OpcodeCounter
+    InjectFuncCall
 )
 
 set(OpcodeCounter_SOURCES
     OpcodeCounter.cpp
+)
+set(InjectFuncCall_SOURCES
+    InjectFuncCall.cpp
 )
 
 # 设置编译器的配置

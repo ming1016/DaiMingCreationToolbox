@@ -265,6 +265,10 @@
             {
                 "id":"facebook/lexical",
                 "des":"facebook 开源的编辑器"
+            },
+            {
+                "id":"source-academy/sicp",
+                "des":"SICP JS 版本"
             }
         ]
     },

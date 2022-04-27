@@ -2,17 +2,15 @@ set(PLUGINS
     OpcodeCounter
     InjectFuncCall
     StaticCallCounter
+    DynamicCallCounter
+    MBASub
 )
 
-set(OpcodeCounter_SOURCES
-    OpcodeCounter.cpp
-)
-set(InjectFuncCall_SOURCES
-    InjectFuncCall.cpp
-)
-set(StaticCallCounter_SOURCES
-    StaticCallCounter.cpp
-)
+set(MBASub_SOURCES MBASub.cpp)
+set(DynamicCallCounter_SOURCES DynamicCallCounter.cpp)
+set(OpcodeCounter_SOURCES OpcodeCounter.cpp)
+set(InjectFuncCall_SOURCES InjectFuncCall.cpp)
+set(StaticCallCounter_SOURCES StaticCallCounter.cpp)
 
 # 设置编译器的配置
 foreach( plugin ${PLUGINS})

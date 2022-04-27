@@ -137,7 +137,7 @@ bool DynamicCallCounter::runOnModule(Module &M) {
 
   FunctionCallee Printf = M.getOrInsertFunction("printf", PrintfTy);
 
-  // Set attributes as per inferLibFuncAttributes in BuildLibCalls.cpp
+  // Set attributes as per inferLibFuncAttributes in .cpp
   Function *PrintfF = dyn_cast<Function>(Printf.getCallee());
   PrintfF->setDoesNotThrow();
   PrintfF->addParamAttr(0, Attribute::NoCapture);

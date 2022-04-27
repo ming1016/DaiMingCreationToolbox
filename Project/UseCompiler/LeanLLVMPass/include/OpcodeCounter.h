@@ -1,5 +1,5 @@
-#ifndef OPCODECOUNTER_H
-#define OPCODECOUNTER_H
+#ifndef LLP_OPCODECOUNTER_H
+#define LLP_OPCODECOUNTER_H
 
 #include "llvm/ADT/StringMap.h"
 #include "llvm/IR/Function.h"

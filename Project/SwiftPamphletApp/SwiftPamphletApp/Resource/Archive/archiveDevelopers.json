@@ -18,6 +18,10 @@
             {
                 "id":"LiarPrincess",
                 "des":"做过 python 解释器和 gb 模拟器"
+            },
+            {
+                "id":"banach-space",
+                "des":"LLVM 开发者，llvm-tutor 作者"
             }
         ]
     },

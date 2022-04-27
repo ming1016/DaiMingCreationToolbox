@@ -1,5 +1,5 @@
-#ifndef STATICCALLCOUNTER_H
-#define STATICCALLCOUNTER_H
+#ifndef LLP_STATICCALLCOUNTER_H
+#define LLP_STATICCALLCOUNTER_H
 
 #include "llvm/ADT/MapVector.h"
 #include "llvm/IR/AbstractCallSite.h"

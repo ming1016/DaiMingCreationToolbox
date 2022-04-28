@@ -4,8 +4,10 @@ set(PLUGINS
     StaticCallCounter
     DynamicCallCounter
     MBASub
+    MBAAdd
 )
 
+set(MBAAdd_SOURCES MBAAdd.cpp)
 set(MBASub_SOURCES MBASub.cpp)
 set(DynamicCallCounter_SOURCES DynamicCallCounter.cpp)
 set(OpcodeCounter_SOURCES OpcodeCounter.cpp)

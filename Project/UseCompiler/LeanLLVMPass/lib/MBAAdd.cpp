@@ -14,6 +14,7 @@ $ opt -load-pass-plugin <BUILD_DIR>/lib/libMBAAdd.so --passes="mba-add" <bitcode
 #include "llvm/Passes/PassPlugin.h"
 #include "llvm/Transforms/Utils/BasicBlockUtils.h"
 #include "Ratio.h"
+#include <random>
 
 using namespace llvm;
 #define DEBUG_TYPE "mba-add"
@@ -50,7 +51,7 @@ bool MBAAdd::runOnBasicBlock(BasicBlock &BB) {
         }
 
         // 跳过非8位整数的指令。
-        if (!BinOp->getType()->isIntegerTy() || !(BinOp->getType()->getIntegerBitWidth() = 8)) {
+        if (!BinOp->getType()->isIntegerTy() || !(BinOp->getType()->getIntegerBitWidth() == 8)) {
             continue;
         }
 
@@ -58,6 +59,88 @@ bool MBAAdd::runOnBasicBlock(BasicBlock &BB) {
         if (Dist(RNG) > MBARatio.getRatio()) {
             continue;
         }
+
+        // 一个统一的接口，用来创建指令并将其插入基本块中。
+        IRBuilder<> Builder(BinOp);
+
+        // 一些常量用来构建替换指令
+        auto Val39 = ConstantInt::get(BinOp->getType(), 39);
+        auto Val151 = ConstantInt::get(BinOp->getType(), 151);
+        auto Val23 = ConstantInt::get(BinOp->getType(), 23);
+        auto Val2 = ConstantInt::get(BinOp->getType(), 2);
+        auto Val111 = ConstantInt::get(BinOp->getType(), 111);
+
+        // 构建一个指令来表示 a + b == (((a ^ b) + 2 * (a & b)) * 39 + 23) * 151 + 111
+        Instruction *NewInst = 
+            // E = e5 + 111
+            BinaryOperator::CreateAdd(
+                Val111,
+                // e5 = e4 * 151
+                Builder.CreateMul(
+                    Val151,
+                    // e4 = e2 + 23
+                    Builder.CreateAdd(
+                        Val23,
+                        // e3 = e2 * 39
+                        Builder.CreateMul(
+                            Val39,
+                            // e2 = e0 + e1
+                            Builder.CreateAdd(
+                                // e0 = a ^ b
+                                Builder.CreateXor(BinOp->getOperand(0), BinOp->getOperand(1)),
+                                // e1 = 2 * (a & b)
+                                Builder.CreateMul(
+                                    Val2, Builder.CreateAnd(BinOp->getOperand(0), BinOp->getOperand(1))))
+                        ) // e3 = e2 * 39
+                    ) // e4 = e2 + 23
+                ) // e5 = e4 * 151
+            ); // E = e5 + 111    
+        
+        // 下面是一些调试信息。
+        LLVM_DEBUG(dbgs() << "MBAAdd: " << *BinOp << " -> " << *NewInst << "\n");
+
+        // 替换指令。将 a + b （原指令）替换成 (((a ^ b) + 2 * (a & b)) * 39 + 23) * 151 + 111（新指令）
+        ReplaceInstWithInst(BB.getInstList(), Inst, NewInst);
+        Changed = true;
+        
+        // 更新统计
+        ++SubstCount;
+    }
+    return Changed;
+}
+
+PreservedAnalyses MBAAdd::run(Function &F, FunctionAnalysisManager &) {
+    bool Changed = false;
+
+    for (auto &BB : F) {
+        Changed |= runOnBasicBlock(BB);
+    }
+    return (Changed ? llvm::PreservedAnalyses::none() : llvm::PreservedAnalyses::all());
+}
+
+// 注册
+llvm::PassPluginLibraryInfo getMBAAddPluginInfo() {
+    return {LLVM_PLUGIN_API_VERSION, "mba-add", LLVM_VERSION_STRING,
+            [](PassBuilder &PB) {
+                PB.registerPipelineParsingCallback(
+                    [](StringRef Name, FunctionPassManager &FPM,
+                          ArrayRef<PassBuilder::PipelineElement>) {
+                        if (Name == "mba-add") {
+                            FPM.addPass(MBAAdd());
+                            FPM.addPass(MBAAdd());
+                            return true;
+                        }
+                        return false;
+                    });
+            }};
+}
+
+extern "C" LLVM_ATTRIBUTE_WEAK ::llvm::PassPluginLibraryInfo llvmGetPassPluginInfo() {
+    return getMBAAddPluginInfo();
+}
+
+
+
 
 
 

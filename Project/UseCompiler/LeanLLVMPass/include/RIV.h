@@ -26,6 +26,21 @@ public:
     llvm::PreservedAnalyses run(llvm::Function &F, llvm::FunctionAnalysisManager &FAM);
 private:
     llvm::raw_ostream &OS;
-}
+};
+
+// Legacy PM 接口
+struct LegacyRIV : public llvm::FunctionPass {
+    static char ID;
+    LegacyRIV() : llvm::FunctionPass(ID) {}
+    bool runOnFunction(llvm::Function &) override;
+    void print(llvm::raw_ostream &O, llvm::Module const *) const override;
+    void getAnalysisUsage(llvm::AnalysisUsage &Info) const override;
+
+    RIV::Result const &getRIVMap() const { return RIVMap; }
+
+    // 这个 pass 实际映射计算。注意编译每次调用只创建一个 pass 实例。每次运行 pass 都会重复使用同一个 RIVMap 实例。
+    RIV::Result RIVMap;
+    RIV Impl;
+};
 
 #endif

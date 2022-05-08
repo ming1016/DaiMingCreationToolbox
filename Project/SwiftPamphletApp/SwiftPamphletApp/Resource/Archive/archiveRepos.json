@@ -393,6 +393,10 @@
             {
                 "id":"agarrharr/awesome-cli-apps",
                 "des":"命令行应用程序收藏"
+            },
+            {
+                "id":"httpswift/swifter",
+                "des":"swift 写的 http 服务器引擎"
             }
         ]
     },

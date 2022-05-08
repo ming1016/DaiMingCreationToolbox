@@ -5,8 +5,16 @@ set(PLUGINS
     DynamicCallCounter
     MBASub
     MBAAdd
+    RIV
+    DuplicateBB
+    MergeBB
+    FindFCmpEq
 )
 
+set(FindFCmpEq_SOURCES FindFCmpEq.cpp)
+set(MergeBB_SOURCES MergeBB.cpp)
+set(DuplicateBB_SOURCES DuplicateBB.cpp)
+set(RIV_SOURCES RIV.cpp)
 set(MBAAdd_SOURCES MBAAdd.cpp)
 set(MBASub_SOURCES MBASub.cpp)
 set(DynamicCallCounter_SOURCES DynamicCallCounter.cpp)

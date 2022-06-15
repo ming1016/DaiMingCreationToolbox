@@ -483,6 +483,10 @@
             {
                 "id":"bizz84/SwiftyStoreKit",
                 "des":"应用内购框架"
+            },
+            {
+                "id":"wikimedia/wikipedia-ios",
+                "des":""
             }
         ]
     },
@@ -930,6 +934,18 @@
             {
                 "id":"chaozh/awesome-blockchain-cn",
                 "des":"区块链 awesome"
+            },
+            {
+                "id":"argentlabs/web3.swift",
+                "des":"以太坊 Swift API，支持智能合约、ENS 和 ERC20"
+            },
+            {
+                "id":"chainfeeds/RSSAggregatorforWeb3",
+                "des":"web3 的 rss feed 订阅源"
+            },
+            {
+                "id":"Planetable/Planet",
+                "des":"由 IPFS 和以太坊名称系统提供支持的去中心化博客和网站"
             }
         ]
     },

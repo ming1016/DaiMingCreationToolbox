@@ -16,7 +16,12 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .task {
-            await PlayWeatherKit().simpleShowWeather()
+            PlaySyntax.generic()
+//            PlaySyntax.regex()
+//            await PlaySyntax.clockInstantDuration()
+//            PlaySyntax.multiStatementClosureTypeInference()
+//            PlaySyntax.ifletOptional()
+//            await PlayWeatherKit().simpleShowWeather()
         }
     }
 }

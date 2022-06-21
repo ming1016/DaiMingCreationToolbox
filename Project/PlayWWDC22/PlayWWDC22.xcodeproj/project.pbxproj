@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08A8D8C32861A7AD007A2DB4 /* PlaySyntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8D8C22861A7AD007A2DB4 /* PlaySyntax.swift */; };
 		08F4BE7028616EE400733F12 /* PlayWWDC22App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4BE6F28616EE400733F12 /* PlayWWDC22App.swift */; };
 		08F4BE7228616EE400733F12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4BE7128616EE400733F12 /* ContentView.swift */; };
 		08F4BE7428616EE600733F12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08F4BE7328616EE600733F12 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08A8D8C22861A7AD007A2DB4 /* PlaySyntax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySyntax.swift; sourceTree = "<group>"; };
 		08F4BE6C28616EE400733F12 /* PlayWWDC22.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayWWDC22.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F4BE6F28616EE400733F12 /* PlayWWDC22App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayWWDC22App.swift; sourceTree = "<group>"; };
 		08F4BE7128616EE400733F12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,12 +57,13 @@
 		08F4BE6E28616EE400733F12 /* PlayWWDC22 */ = {
 			isa = PBXGroup;
 			children = (
-				08F4BE6F28616EE400733F12 /* PlayWWDC22App.swift */,
 				08F4BE7128616EE400733F12 /* ContentView.swift */,
-				08F4BE7328616EE600733F12 /* Assets.xcassets */,
-				08F4BE7528616EE600733F12 /* Preview Content */,
+				08A8D8C22861A7AD007A2DB4 /* PlaySyntax.swift */,
 				08F4BE7D28616F8200733F12 /* PlayWeatherKit.swift */,
 				08F4BE7F2861755600733F12 /* PlayAppIntents.swift */,
+				08F4BE6F28616EE400733F12 /* PlayWWDC22App.swift */,
+				08F4BE7328616EE600733F12 /* Assets.xcassets */,
+				08F4BE7528616EE600733F12 /* Preview Content */,
 			);
 			path = PlayWWDC22;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				08F4BE7228616EE400733F12 /* ContentView.swift in Sources */,
 				08F4BE7E28616F8200733F12 /* PlayWeatherKit.swift in Sources */,
 				08F4BE7028616EE400733F12 /* PlayWWDC22App.swift in Sources */,
+				08A8D8C32861A7AD007A2DB4 /* PlaySyntax.swift in Sources */,
 				08F4BE802861755600733F12 /* PlayAppIntents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

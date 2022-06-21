@@ -15,8 +15,8 @@
                 "des":"科技爱好者周刊"
             },
             {
-                "id":"ming1016/DaiMingCreationToolbox",
-                "des":"戴铭的创作工具箱"
+                "id":"KwaiAppTeam/SwiftPamphletApp",
+                "des":"戴铭的开发小册子"
             }
         ]
     },
@@ -142,6 +142,10 @@
             {
                 "id":"ZeeZide/CodeEditor",
                 "des":"使用 Highlight.js 的来做语法高亮的 SwiftUI 编辑器"
+            },
+            {
+                "id":"tw93/MiaoYan",
+                "des":"轻灵的 Markdown 笔记本伴你写出妙言"
             }
         ]
     },

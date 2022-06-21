@@ -16,12 +16,12 @@ struct IntroView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120, height: 120)
-            Text("戴铭的创作工具箱").bold().font(.largeTitle)
+            Text("戴铭的开发小册子").bold().font(.largeTitle)
             HStack {
-                Text("全面且优质的工具箱")
-                Link("GitHub 地址", destination: URL(string: "https://github.com/ming1016/DaiMingCreationToolbox")!)
+                Text("一本活的开发手册")
+                Link("GitHub 地址", destination: URL(string: "https://github.com/KwaiAppTeam/SwiftPamphletApp")!)
             }
-            Text("版本1.0").font(.footnote)
+            Text("版本4.6").font(.footnote)
         }
         .frame(minWidth: SPC.detailMinWidth)
         .enableInjection()

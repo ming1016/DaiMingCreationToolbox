@@ -26,6 +26,7 @@ struct Demo: View {
     var body: some View {
         Group {
 //            V()
+//            PlayCharts()
 //            PlayTextView()
 //            PlayLinkView()
 //            PlayLabelView()
@@ -51,7 +52,7 @@ struct Demo: View {
 //            PlayColor()
 //            PlayEffect()
 //            PlayKeyboard()
-            PlayAnimation()
+//            PlayAnimation()
 //            PlayCanvas()
             
         }
@@ -115,7 +116,7 @@ struct SwiftPamphletApp: View {
 
         } // end NavigationView
         .frame(minHeight: 650)
-        .navigationTitle("戴铭的创作工具箱")
+        .navigationTitle("戴铭的开发小册子")
         .navigationSubtitle(appVM.alertMsg)
         .toolbar {
             ToolbarItem(placement: ToolbarItemPlacement.navigation) {

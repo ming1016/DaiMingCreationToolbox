@@ -72,6 +72,18 @@
             {
                 "id":"cloudreve/Cloudreve",
                 "des":"云存储部署"
+            },
+            {
+                "id":"omniedgeio/n2n",
+                "des":"Peer-to-peer VPN"
+            },
+            {
+                "id":"omniedgeio/omniedge-macOS",
+                "des":"OmniEdge macOS App"
+            },
+            {
+                "id":"omniedgeio/omniedge-iOS",
+                "des":"OmniEdge iOS Client"
             }
         ]
     },
@@ -198,6 +210,10 @@
             {
                 "id":"Enna1/LLVM-Clang-Study-Notes",
                 "des":"LLVM/Clang 学习笔记"
+            },
+            {
+                "id":"cesanta/elk",
+                "des":"用于嵌入式系统的低占用 JavaScript 引擎"
             }
         ]
     },
@@ -372,6 +388,10 @@
             {
                 "id":"rxhanson/Rectangle",
                 "des":"在 macOS 上用键盘快捷键和捕捉区移动和调整窗口大小"
+            },
+            {
+                "id":"lexrus/SwiftyMenu",
+                "des":"Finder 菜单"
             }
         ]
     },

@@ -76,10 +76,14 @@ class PlaySyntax {
     }
     
     static func ifletOptional() {
-        let s: String? = "hi"
-        if let s {
-            print(s)
+        let s1: String? = "hey"
+        let s2: String? = "u"
+        if let s1 {
+            print(s1)
         }
+        
+        guard let s1, let s2 else { return }
+        print(s1 + " " + s2)
     }
     
 }

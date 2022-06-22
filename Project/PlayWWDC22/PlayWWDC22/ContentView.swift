@@ -10,17 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            PlaySwiftUI4()
         }
         .task {
-            PlaySyntax.generic()
+//            PlaySyntax.generic()
 //            PlaySyntax.regex()
 //            await PlaySyntax.clockInstantDuration()
 //            PlaySyntax.multiStatementClosureTypeInference()
-//            PlaySyntax.ifletOptional()
+            PlaySyntax.ifletOptional()
 //            await PlayWeatherKit().simpleShowWeather()
         }
     }

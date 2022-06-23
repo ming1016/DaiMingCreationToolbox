@@ -6,11 +6,18 @@
 //
 import StoreKit
 import SwiftUI
+import Charts
 
 struct PlaySwiftUI4: View {
     var body: some View {
-        PPPP()
-        PPasteButton()
+        PAnyLayout()
+//        PViewThatFits()
+//        PSwiftCharts()
+//        PCustomLayoutView()
+//        PNavigationSplitViewThreeColumn()
+//        PNavigationSplitViewTwoColumn()
+//        PNavigationStack()
+//        PPasteButton()
 //        PMultiDatePicker()
 //        PRequestReview()
 //        PShareLink()
@@ -20,16 +27,185 @@ struct PlaySwiftUI4: View {
     }
 }
 
-struct PPPP: View {
-    let colors: [Color] = [.blue, .cyan, .green, .yellow, .orange, .red, .purple]
+struct PAnyLayout: View {
+    @State private var isVertical = false
+    var body: some View {
+        let layout = isVertical ? AnyLayout(VStack()) : AnyLayout(HStack())
+        layout {
+            Image(systemName: "star").foregroundColor(.yellow)
+            Text("Starming.com")
+            Text("戴铭")
+        }
+        Button("Click") {
+            withAnimation {
+                isVertical.toggle()
+            }
+        } // end button
+    } // end body
+}
 
-        var body: some View {
+struct PViewThatFits: View {
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack {
+                Image(systemName: "heart")
+                Text("收藏")
+            }
             VStack {
-                ForEach(colors, id: \.self) { color in
-                    Rectangle().fill(color.gradient)
-                }
+                Image(systemName: "heart")
+                Text("收藏")
             }
         }
+    }
+}
+
+struct PSwiftCharts: View {
+    struct CData: Identifiable {
+        let id = UUID()
+        let i: Int
+        let v: Double
+    }
+    
+    @State private var a: [CData] = [
+        .init(i: 0, v: 2),
+        .init(i: 1, v: 20),
+        .init(i: 2, v: 3),
+        .init(i: 3, v: 30),
+        .init(i: 4, v: 8),
+        .init(i: 5, v: 80)
+    ]
+    
+    var body: some View {
+        Chart(a) { i in
+            LineMark(x: .value("Index", i.i), y: .value("Value", i.v))
+            BarMark(x: .value("Index", i.i), yStart: .value("开始", 0), yEnd: .value("结束", i.v))
+                .foregroundStyle(by: .value("Value", i.v))
+        } // end Chart
+    } // end body
+}
+
+struct PCustomLayout: Layout {
+    
+    private func maxSize(subviews: Subviews) -> CGSize {
+        let subviewSizes = subviews.map { s in
+            s.sizeThatFits(.unspecified)
+        }
+        let maxSize: CGSize = subviewSizes.reduce(.zero) { current, size in
+            CGSize(width: max(current.width, size.width), height: max(current.height, size.height))
+        }
+        return maxSize
+    }
+    
+    private func spacings(subviews: Subviews) -> [CGFloat] {
+        let spacing: [CGFloat] = subviews.indices.map { i in
+            guard i < subviews.count - 1 else {
+                return 0.0
+            }
+            return subviews[i].spacing.distance(to: subviews[i + 1].spacing, along: .horizontal)
+        }
+        return spacing
+    }
+    
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let maxSize = maxSize(subviews: subviews)
+        let spacing = spacings(subviews: subviews)
+        
+        let size = ProposedViewSize(width: maxSize.width, height: maxSize.height)
+        var x = bounds.minX + maxSize.width / 2
+        for i in subviews.indices {
+            subviews[i].place(at: CGPoint(x: x, y: bounds.minY), anchor: .center, proposal: size)
+            x += maxSize.width + spacing[i]
+        }
+    }
+    
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let maxSize = maxSize(subviews: subviews)
+        let spacings = spacings(subviews: subviews)
+        let totalSpacing = spacings.reduce(0.0, +)
+        return CGSize(width: maxSize.width * CGFloat(subviews.count) + totalSpacing, height: maxSize.height)
+    }
+}
+
+//struct PCustomLayoutView: View {
+//    var body: some View {
+//        PCustomLayout {
+//            Text("Hello...")
+//                            .foregroundColor(.red)
+//                        Text("Hello.........")
+//                            .foregroundColor(.green)
+//                        Text("Hello..............")
+//                            .foregroundColor(.blue)
+//        }
+//    }
+//}
+
+
+
+struct PNavigationSplitViewThreeColumn: View {
+    struct Group: Identifiable, Hashable {
+        let id = UUID()
+        var title: String
+        var subs: [String]
+    }
+    
+    @State private var gps = [
+        Group(title: "One", subs: ["o1", "o2", "o3"]),
+        Group(title: "Two", subs: ["t1", "t2", "t3"])
+    ]
+    
+    @State private var choiceGroup: Group?
+    @State private var choiceSub: String?
+    
+    @State private var cv = NavigationSplitViewVisibility.automatic
+    
+    var body: some View {
+        NavigationSplitView(columnVisibility: $cv) {
+            List(gps, selection: $choiceGroup) { g in
+                Text(g.title).tag(g)
+            }
+            .navigationSplitViewColumnWidth(250)
+        } content: {
+            List(choiceGroup?.subs ?? [], id: \.self, selection: $choiceSub) { s in
+                Text(s)
+            }
+        } detail: {
+            Text(choiceSub ?? "选一个")
+            Button("点击") {
+                cv = .all
+            }
+        }
+        .navigationSplitViewStyle(.prominentDetail)
+    }
+}
+
+struct PNavigationSplitViewTwoColumn: View {
+    @State private var a = ["one", "two", "three"]
+    @State private var choice: String?
+    
+    var body: some View {
+        NavigationSplitView {
+            List(a, id: \.self, selection: $choice, rowContent: Text.init)
+        } detail: {
+            Text(choice ?? "选一个")
+        }
+    }
+}
+
+struct PNavigationStack: View {
+    @State private var a = [1, 3, 9] // 深层链接
+    var body: some View {
+        NavigationStack(path: $a) {
+            List(1..<10) { i in
+                NavigationLink(value: i) {
+                    Label("第 \(i) 行", systemImage: "\(i).circle")
+                }
+            }
+            .navigationDestination(for: Int.self) { i in
+                Text("第 \(i) 行内容")
+            }
+            .navigationTitle("NavigationStack Demo")
+        }
+    }
 }
 
 struct PPasteButton: View {

@@ -10,12 +10,18 @@ import Charts
 
 struct PlaySwiftUI4: View {
     var body: some View {
-        PAnyLayout()
+        
+        PTextTransitionsView()
+//        PButtonStyleComposition()
+//        PGradientAndShadow()
+//        PGauge()
+//        PAnyLayout()
 //        PViewThatFits()
 //        PSwiftCharts()
 //        PCustomLayoutView()
 //        PNavigationSplitViewThreeColumn()
 //        PNavigationSplitViewTwoColumn()
+//        PNavigationStackDestination()
 //        PNavigationStack()
 //        PPasteButton()
 //        PMultiDatePicker()
@@ -24,6 +30,82 @@ struct PlaySwiftUI4: View {
 //        PTapLocation()
 //        PGrid()
 //        PSheet()
+    }
+}
+
+
+
+struct PTextTransitionsView: View {
+    
+    
+    @State private var expandMessage = true
+    private let mintWithShadow: AnyShapeStyle = AnyShapeStyle(Color.mint.shadow(.drop(radius: 2)))
+    private let primaryWithoutShadow: AnyShapeStyle = AnyShapeStyle(Color.primary.shadow(.drop(radius: 0)))
+
+    var body: some View {
+        Text("Dai Ming Swift Pamphlet")
+            .font(expandMessage ? .largeTitle.weight(.heavy) : .body)
+            .foregroundStyle(expandMessage ? mintWithShadow : primaryWithoutShadow)
+            .onTapGesture { withAnimation { expandMessage.toggle() }}
+            .frame(maxWidth: expandMessage ? 150 : 250)
+            .drawingGroup()
+            .padding(20)
+            .background(.cyan.opacity(0.3), in: RoundedRectangle(cornerRadius: 6))
+    }
+}
+
+struct PButtonStyleComposition: View {
+    @State private var isT = false
+    var body: some View {
+        Section("标签") {
+            VStack(alignment: .leading) {
+                HStack {
+                    Toggle("Swift", isOn: $isT)
+                    Toggle("SwiftUI", isOn: $isT)
+                }
+                HStack {
+                    Toggle("Swift Chart", isOn: $isT)
+                    Toggle("Navigation API", isOn: $isT)
+                }
+            }
+            .toggleStyle(.button)
+            .buttonStyle(.bordered)
+        }
+    }
+}
+
+struct PGradientAndShadow: View {
+    var body: some View {
+        Image(systemName: "bird")
+            .frame(width: 150, height: 150)
+            .background(in: Rectangle())
+            .backgroundStyle(.cyan.gradient)
+            .foregroundStyle(.white.shadow(.drop(radius: 1, y: 3.0)))
+            .font(.system(size: 60))
+    }
+}
+
+struct PGauge: View {
+    @State private var progress = 0.45
+    var body: some View {
+        Gauge(value: progress) {
+            Text("进度")
+        } currentValueLabel: {
+            Text(progress.formatted(.percent))
+        } minimumValueLabel: {
+            Text(0.formatted(.percent))
+        } maximumValueLabel: {
+            Text(100.formatted(.percent))
+        }
+        
+        Gauge(value: progress) {
+            
+        } currentValueLabel: {
+            Text(progress.formatted(.percent))
+                .font(.footnote)
+        }
+        .gaugeStyle(.accessoryCircularCapacity)
+        .tint(.cyan)
     }
 }
 
@@ -187,6 +269,28 @@ struct PNavigationSplitViewTwoColumn: View {
             List(a, id: \.self, selection: $choice, rowContent: Text.init)
         } detail: {
             Text(choice ?? "选一个")
+        }
+    }
+}
+
+struct PNavigationStackDestination: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                NavigationLink(value: "字符串") {
+                    Text("字符串")
+                }
+                NavigationLink(value: Color.red) {
+                    Text("红色")
+                }
+            }
+            .navigationTitle("不同类型 Destination")
+            .navigationDestination(for: Color.self) { c in
+                c.clipShape(Circle())
+            }
+            .navigationDestination(for: String.self) { s in
+                Text("\(s) 的 detail")
+            }
         }
     }
 }

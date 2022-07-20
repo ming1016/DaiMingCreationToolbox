@@ -1,6 +1,11 @@
 ;; -*- lexical-binding: t -*-
 
-;; ----- 插件管理 -------
+;; ------------ orgmode ----------
+(setq org-image-actual-width '(500))  ;; 设置图片默认宽度
+(setq org-src-fontify-natively t)
+
+;; ------------ 插件管理 -----------
+
 ;; 懒猫的 awesome-tab 多 tab 切换文件
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/awesome-tab/"))
 
@@ -35,7 +40,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     (t
     (awesome-tab-get-group-name (current-buffer))))))
 
-
 ;; 增强文件内搜索和跳转函数定义
 (package-install 'consult)
 (global-set-key (kbd "C-s") 'consult-line)
@@ -61,6 +65,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (package-install 'keycast)
 (keycast-mode t)
 
+;; 快捷键提示
+(package-install 'which-key)
+(which-key-mode t)
 
 
 ;; ---- 自定义快捷键 ------
@@ -78,7 +85,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; f12 打开日记
 (defun open-diary-file()
   (interactive)
-  (find-file "~/Documents/EmacsFile/org/today.org"))
+  (find-file "~/Documents/Gitee/OrgModeFile/org/today.org"))
 (global-set-key (kbd "<f12>") 'open-diary-file)
 
 ;; F1 打开配置文件
@@ -87,8 +94,16 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "<f2>") 'open-init-file) ;; 使用 F2 键来打开初始配置文件
 
-;; ---- 功能完善 ----
-(desktop-save-mode 1) ;; 保存当前窗口，下次启动恢复
+;; ------- 功能完善 -------
+(global-hl-line-mode 0) ;; 当前行高亮
+;; 自动换行
+(global-visual-line-mode 1)
+(setq-default truncate-lines t)
+(add-hook 'org-mode-hook
+    (lambda()
+      (setq truncate-lines nil)))
+
+(desktop-save-mode 0) ;; 保存当前窗口，下次启动恢复
 (setq make-backup-files nil) ;; 删除 ~ 这样的用来备份的文件
 (global-company-mode 1) ;; 补全
 (setq company-idle-delay 0) ;; 补全加速
@@ -96,7 +111,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (show-paren-mode t) ;; 括号匹配错误提示
 (delete-selection-mode 1) ;; 选中区域输入新内容时，自动删除选中区域
 
-;; ---- GUI 完善 ---
+;; -------- GUI 完善 ------
 (setq mac-option-modifier 'meta
       mac-command-modifier 'super
       mac-right-option-modifier 'control
@@ -107,9 +122,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq mouse-wheel-progressive-speed nil)
 
 (set-face-attribute 'default nil :height 120) ;; 字体设置为12pt
+;;(add-to-list 'default-frame-alist
+;;             '(font . "LXGW WenKai-14"))
 (tool-bar-mode -1) ;; 工具栏
 (scroll-bar-mode -1) ;; 滚动栏
-(global-linum-mode 1) ;; 行号
+(global-linum-mode 0) ;; 行号
 (setq-default cursor-type 'bar) ;; 更改
 (icomplete-mode 1)
 
@@ -119,7 +136,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(consult embark marginalia orderless vertico keycast org company)))
+   '(neotree which-key consult embark marginalia orderless vertico keycast org company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
